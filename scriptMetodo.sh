@@ -1,1 +1,1 @@
-mvn clean test -Dtest=PersonaTest#verificarCantidadFavoriteMealsLista
+./mvnw clean test -Dtest=PersonaTest#verificarCantidadFavoriteMealsLista

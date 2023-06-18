@@ -2,6 +2,7 @@ package base;
 
 import listeners.SuiteListeners;
 import listeners.TestListeners;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
@@ -16,6 +17,11 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true, description = "Master precondition")
     public void setUpBase() {
+        softAssert = new SoftAssert();
+    }
+    
+    @AfterMethod(alwaysRun = true, description = "Master postcondition")
+    public void tearDown() {
         softAssert = new SoftAssert();
     }
 }

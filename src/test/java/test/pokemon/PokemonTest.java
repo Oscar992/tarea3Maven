@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class PokemonTest extends BaseTest {
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() {
-        Logs.info("setUp");
+    @BeforeMethod(alwaysRun = true, description = "Master precondition")
+    @Override
+    public void setUpBase() {
+        super.setUpBase();
+        Logs.info("SetUp");
     }
 
     @Test(groups = {smoke, regression})
@@ -81,23 +83,24 @@ public class PokemonTest extends BaseTest {
     @Description("ejercicio1")
     public void ejercicio1(Pokemon pokemon) {
         Logs.info("%s", pokemon);
-        var pass = false;
-        if ((pokemon.getNombre().toCharArray().length < 30 && pokemon.getNombre().toCharArray().length > 2) &&
-                (pokemon.getNombreJapones().toCharArray().length < 25 && pokemon.getNombreJapones().toCharArray().length > 2) &&
-                (pokemon.getAtk() > 0) &&
-                (pokemon.getDef() > 0) &&
-                (pokemon.getSpDef() > 0) &&
-                (pokemon.getCrit() > 0) &&
-                (pokemon.getPeso() > 0) &&
-                (Boolean.valueOf(pokemon.getAtrapado()) instanceof Boolean)) {
-            pass = true;
-        }
-        softAssert.assertEquals(pass, true);
+
+        softAssert.assertTrue(pokemon.getNombre().toCharArray().length < 30 &&
+                pokemon.getNombre().toCharArray().length > 2);
+        softAssert.assertTrue(pokemon.getNombreJapones().toCharArray().length < 25 &&
+                pokemon.getNombreJapones().toCharArray().length > 2);
+        softAssert.assertTrue(pokemon.getAtk() > 0);
+        softAssert.assertTrue(pokemon.getDef() > 0);
+        softAssert.assertTrue(pokemon.getSpDef() > 0);
+        softAssert.assertTrue(pokemon.getCrit() > 0);
+        softAssert.assertTrue(pokemon.getCrit() > 0);
+        softAssert.assertTrue(Boolean.valueOf(pokemon.getAtrapado()) instanceof Boolean);
         softAssert.assertAll();
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, description = "Master postcondition")
+    @Override
     public void tearDown() {
+        super.tearDown();
         Logs.info("tearDown");
     }
 }

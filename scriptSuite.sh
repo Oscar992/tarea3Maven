@@ -1,1 +1,1 @@
-mvn clean test -DsuiteName=smoke allure:serve
+./mvnw clean test -DsuiteName=smoke allure:serve

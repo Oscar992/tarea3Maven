@@ -1,1 +1,1 @@
-mvn clean test -DsuiteName=regression allure:serve
+./mvnw clean test -DsuiteName=regression allure:serve
