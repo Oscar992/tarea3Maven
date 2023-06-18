@@ -1,17 +1,20 @@
 package data;
 
 import com.github.javafaker.Pokemon;
+import io.qameta.allure.Step;
 import org.testng.annotations.DataProvider;
 
 public class DataGiver {
     public static final String DP_POKEMON = "Data Provider Pokemon";
-    
+
+    @Step("getPokemon")
     public static Pokemon getPokemon(int id) {
         final var map = MapParser.getPokemonMap();
         return map.get(id);
     }
 
     @DataProvider(name = DP_POKEMON)
+    @Step("pokemon data provider")
     public Object[][] pokemonDataProvider() {
         final var pokemonLista = ExcelReader.getPokemonList();
         final var object = new Object[pokemonLista.size()][];
