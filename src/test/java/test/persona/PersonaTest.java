@@ -13,7 +13,7 @@ public class PersonaTest extends BaseTest {
 
     private final Persona persona = JsonReader.getPersona("persona");
 
-    @BeforeMethod(alwaysRun = true, description = "Master precondition")
+    @BeforeMethod(alwaysRun = true)
     @Override
     public void setUpBase() {
         super.setUpBase();
@@ -65,7 +65,7 @@ public class PersonaTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @AfterMethod(alwaysRun = true, description = "Master postcondition")
+    @AfterMethod(alwaysRun = true)
     @Override
     public void tearDown() {
         super.tearDown();

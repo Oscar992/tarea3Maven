@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class PokemonTest extends BaseTest {
 
-    @BeforeMethod(alwaysRun = true, description = "Master precondition")
+    @BeforeMethod(alwaysRun = true)
     @Override
     public void setUpBase() {
         super.setUpBase();
@@ -97,7 +97,7 @@ public class PokemonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @AfterMethod(alwaysRun = true, description = "Master postcondition")
+    @AfterMethod(alwaysRun = true)
     @Override
     public void tearDown() {
         super.tearDown();
