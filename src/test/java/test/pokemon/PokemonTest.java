@@ -1,17 +1,29 @@
 package test.pokemon;
 
 
+import Utility.Logs;
 import Utility.Sorts;
 import base.BaseTest;
 import data.DataGiver;
 import data.ExcelReader;
+import model.Pokemon;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 public class PokemonTest extends BaseTest {
 
-    @Test
+    @BeforeMethod(alwaysRun = true)
+    @Override
+    public void setUpBase() {
+        super.setUpBase();
+        Logs.info("SetUp");
+    }
+
+    @Test(groups = {smoke, regression})
+    @Description("verificarPokemon")
     public void verificarPokemon() {
         final var pokemonList = ExcelReader.getPokemonList();
         final var pokemon = DataGiver.getPokemon(20);
@@ -28,7 +40,7 @@ public class PokemonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {smoke}, enabled = false)
     public void ordenarBubbleSortPokemon() {
         final var pokemonList = ExcelReader.getPokemonList();
 
@@ -38,7 +50,7 @@ public class PokemonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {smoke}, enabled = false)
     public void ordenarBubbleSortAlfabeticamentePokemon() {
         final var pokemonList = ExcelReader.getPokemonList();
 
@@ -49,7 +61,8 @@ public class PokemonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {regression})
+    @Description("verificarPokemonNoAtrapados")
     public void verificarPokemonNoAtrapados() {
         final var pokemonList = ExcelReader.getPokemonList();
         final var pokemonFinalList = new ArrayList<>();
@@ -60,5 +73,34 @@ public class PokemonTest extends BaseTest {
         }
         softAssert.assertEquals(pokemonFinalList.size(), "80");
         softAssert.assertAll();
+    }
+
+    @Test(
+            groups = {smoke, regression},
+            dataProvider = DataGiver.DP_POKEMON,
+            dataProviderClass = DataGiver.class
+    )
+    @Description("ejercicio1")
+    public void ejercicio1(Pokemon pokemon) {
+        Logs.info("%s", pokemon);
+
+        softAssert.assertTrue(pokemon.getNombre().toCharArray().length < 30 &&
+                pokemon.getNombre().toCharArray().length > 2);
+        softAssert.assertTrue(pokemon.getNombreJapones().toCharArray().length < 25 &&
+                pokemon.getNombreJapones().toCharArray().length > 2);
+        softAssert.assertTrue(pokemon.getAtk() > 0);
+        softAssert.assertTrue(pokemon.getDef() > 0);
+        softAssert.assertTrue(pokemon.getSpDef() > 0);
+        softAssert.assertTrue(pokemon.getCrit() > 0);
+        softAssert.assertTrue(pokemon.getCrit() > 0);
+        softAssert.assertTrue(Boolean.valueOf(pokemon.getAtrapado()) instanceof Boolean);
+        softAssert.assertAll();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    @Override
+    public void tearDown() {
+        super.tearDown();
+        Logs.info("tearDown");
     }
 }
