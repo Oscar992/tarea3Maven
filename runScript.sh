@@ -1,1 +1,0 @@
-./mvnw clean test -DsuiteName=regression allure:serve

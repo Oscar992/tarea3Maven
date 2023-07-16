@@ -1,1 +1,0 @@
-./mvnw clean test -Dtest=PersonaTest
